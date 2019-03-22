@@ -1,0 +1,10 @@
+com\hakin\gamelife\FwrmsApplication.class
+com\hakin\gamelife\configration\DruidConfiguration.class
+com\hakin\gamelife\controller\MovieController.class
+com\hakin\gamelife\dao\MovieViewingRecordMapper.class
+com\hakin\gamelife\configration\DruidConfiguration2.class
+com\hakin\gamelife\service\impl\MovieViewingRecordServiceImpl.class
+com\hakin\gamelife\utils\LoggerUtil.class
+com\hakin\gamelife\service\MovieViewingRecordService.class
+com\hakin\gamelife\entity\ResultResponse.class
+com\hakin\gamelife\entity\MovieViewingRecord.class

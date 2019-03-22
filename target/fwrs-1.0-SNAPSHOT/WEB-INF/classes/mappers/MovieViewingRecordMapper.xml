@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hakin.gamelife.dao.MovieViewingRecordMapper">
+  <resultMap id="BaseResultMap" type="com.hakin.gamelife.entity.MovieViewingRecord">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="Image" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="mark" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="actor" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="path" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="viewing_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="movie_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, description, Image, mark, actor, path, viewing_time, movie_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from movie_viewing_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from movie_viewing_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hakin.gamelife.entity.MovieViewingRecord">
+    insert into movie_viewing_record (id, name, description, 
+      Image, mark, actor, 
+      path, viewing_time, movie_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, #{actor,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{viewingTime,jdbcType=TIMESTAMP}, #{movieType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hakin.gamelife.entity.MovieViewingRecord">
+    insert into movie_viewing_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="image != null">
+        Image,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="actor != null">
+        actor,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="viewingTime != null">
+        viewing_time,
+      </if>
+      <if test="movieType != null">
+        movie_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="actor != null">
+        #{actor,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="viewingTime != null">
+        #{viewingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movieType != null">
+        #{movieType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hakin.gamelife.entity.MovieViewingRecord">
+    update movie_viewing_record
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        Image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="actor != null">
+        actor = #{actor,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="viewingTime != null">
+        viewing_time = #{viewingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movieType != null">
+        movie_type = #{movieType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hakin.gamelife.entity.MovieViewingRecord">
+    update movie_viewing_record
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      Image = #{image,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      actor = #{actor,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      viewing_time = #{viewingTime,jdbcType=TIMESTAMP},
+      movie_type = #{movieType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!-- resultType="com.hakin.gamelife.entity.MovieViewingRecord"-->
+  <select id="findList" resultMap="BaseResultMap" parameterType="com.hakin.gamelife.entity.MovieViewingRecord">
+    select
+      <include refid="Base_Column_List" />
+    from movie_viewing_record
+    <where>
+      <if test="name != null and name !=''">
+        and name like concat('%', #{name}, '%')
+      </if>
+
+      <if test="description != null and description !=''">
+        and description like concat('%', #{description}, '%')
+      </if>
+
+      <if test="actor != null and actor !=''">
+        and actor like concat('%', #{actor}, '%')
+      </if>
+
+      <if test="viewingTime != null and viewingTime !=''">
+        and viewing_time = #{viewingTime}
+      </if>
+
+      <if test="movieType != null and movieType !=''">
+        and movie_type = #{movieType}
+      </if>
+
+    </where>
+  </select>
+</mapper>
